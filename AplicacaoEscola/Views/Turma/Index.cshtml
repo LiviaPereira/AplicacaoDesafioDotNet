@@ -1,0 +1,52 @@
+﻿@model List<TurmaViewModel>
+
+<h2>Lista de Turmas Ativas</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id Turma</th>
+            <th>Id Curso</th>
+            <th>Turma</th>
+            <th>Ano</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var turma in Model)
+        {
+            <tr>
+                <td>@turma.IdTurma</td>
+                <td>@turma.IdCurso</td>
+                <td>@turma.NomeTurma</td>
+                <td>@turma.Ano</td>
+                <td>
+                    <a asp-action="EditarTurma" asp-controller="Turma" asp-route-id="@turma.IdTurma" class="btn btn-primary">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+@if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div>
+    <a asp-action="CadastroTurma" asp-controller="Turma" class="btn btn-primary">Cadastrar nova Turma</a>
+</div>
+
+<br />
+<div>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Ir para a Página Inicial</a>
+
+</div>

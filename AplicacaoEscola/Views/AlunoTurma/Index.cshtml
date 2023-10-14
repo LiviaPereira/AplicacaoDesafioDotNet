@@ -1,0 +1,54 @@
+﻿@model List<ListaAlunoTurmaViewModel>
+
+<h1>Listagem de Relações Aluno-Turma</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id Aluno</th>
+            <th>Nome Aluno</th>
+            <th>Id Turma</th>
+            <th>Nome Turma</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var relacao in Model)
+        {
+            <tr>
+                <td>@relacao.IdAluno</td>
+                <td>@relacao.Nome</td>
+                <td>@relacao.IdTurma</td>
+                <td>@relacao.NomeTurma</td>
+                <td>
+
+                    <a asp-action="ExcluirRelacao" asp-controller="AlunoTurma" asp-route-idAluno="@relacao.IdAluno" asp-route-idTurma="@relacao.IdTurma" class="btn btn-primary">Excluir</a>
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+@if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div>
+    <a asp-action="CadastroAlunoTurma" asp-controller="AlunoTurma" class="btn btn-primary">Cadastrar nova Relação</a>
+</div>
+
+<br />
+<div>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Ir para a Página Inicial</a>
+
+</div>

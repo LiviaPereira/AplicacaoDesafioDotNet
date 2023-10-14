@@ -1,0 +1,39 @@
+﻿
+   
+
+@model CadastroAlunoTurmaViewModel
+
+<h2>Cadastro Aluno Turma</h2>
+
+@using (Html.BeginForm("CriarRelacao", "AlunoTurma", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(x => x.SelectedAlunoId, new { @class = "control-label" })
+        @Html.DropDownListFor(x => x.SelectedAlunoId, new SelectList(Model.Alunos, "IdAluno", "Nome"), "Selecione o Aluno", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(x => x.SelectedTurmaId, new { @class = "control-label" })
+        @Html.DropDownListFor(x => x.SelectedTurmaId, new SelectList(Model.Turmas, "IdTurma", "NomeTurma"), "Selecione a Turma", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Criar Relação" class="btn btn-primary" />
+    </div>
+}
+
+@if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+@if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+
+

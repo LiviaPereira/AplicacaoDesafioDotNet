@@ -1,0 +1,50 @@
+﻿@model List<AlunoViewModel>
+
+<h2>Lista de Alunos Ativos</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nome</th>
+            <th>Usuário</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var aluno in Model)
+        {
+            <tr>
+                <td>@aluno.IdAluno</td>
+                <td>@aluno.Nome</td>
+                <td>@aluno.Usuario</td>
+                <td>
+                    <a asp-action="EditarAluno" asp-controller="Aluno" asp-route-id="@aluno.IdAluno" class="btn btn-primary">Editar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (!string.IsNullOrEmpty(TempData["ErrorMessage"] as string))
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+@if (!string.IsNullOrEmpty(TempData["SuccessMessage"] as string))
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+<div>
+    <a asp-action="CadastroAluno" asp-controller="Aluno" class="btn btn-primary">Cadastrar novo Aluno</a>
+</div>
+
+<br />
+<div>
+    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Ir para a Página Inicial</a>
+
+</div>
